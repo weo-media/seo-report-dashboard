@@ -1,0 +1,93 @@
+Package Report
+
+-----------------------------------------------------------------------------
+Document:
+Name: SEO-dashboard-2019.ai
+Color Mode: RGB color
+Color Profile: none
+Ruler Units: pixels
+Artboard Dimensions: 927 px x 5253 px
+Show Images in Outline Mode: OFF
+Highlight Substituted Fonts: OFF
+Highlight Substituted Glyphs: OFF
+Preserve Text Editability
+Simulate Colored Paper: OFF
+
+-----------------------------------------------------------------------------
+Spot Color Objects:
+
+-----------------------------------------------------------------------------
+Missing Fonts:NONE
+
+-----------------------------------------------------------------------------
+Protected Fonts that were not packaged:NONE
+
+-----------------------------------------------------------------------------
+Fonts:
+Myriad Pro (OTF)
+Poppins Light (OTF)
+Poppins Bold (OTF)
+
+-----------------------------------------------------------------------------
+Embedded Fonts:
+NONE
+
+-----------------------------------------------------------------------------
+Missing Links:
+NONE
+
+-----------------------------------------------------------------------------
+Linked Images:
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/Notes-from Chris/andy-done.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 117K, 200 by 200 pixels
+Dimensions: 117.971 by 117.971 points 
+Resolution: 122.064 by 122.064 pixels per inch
+
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/links/links/Screen Shot 2018-09-14 at 11.35.39 AM.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 5099K, 796 by 1640 pixels
+Dimensions: 398 by 820 points 
+Resolution: 144 by 144 pixels per inch
+
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/links/links/Screen Shot 2018-09-14 at 12.10.52 PM.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 2553K, 782 by 836 pixels
+Dimensions: 391 by 418 points 
+Resolution: 144 by 144 pixels per inch
+
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/links/links/Screen Shot 2018-09-14 at 11.07.04 AM.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 6208K, 1546 by 1028 pixels
+Dimensions: 773 by 514 points 
+Resolution: 144 by 144 pixels per inch
+
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/Getty/GettyImages-914772054.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8789K, 2000 by 1500 pixels
+Dimensions: 1619 by 1671.5 points 
+Resolution: 88.944 by 64.613 pixels per inch
+
+
+/Users/kamasolevad/Google Drive/Design/WEO/WEO-SEO/Getty/GettyImages-914772054.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8789K, 2000 by 1500 pixels
+Dimensions: 1619 by 1671.5 points 
+Resolution: 88.944 by 64.613 pixels per inch

@@ -1,0 +1,70 @@
+<script defer>
+var s = document.createElement('script');
+s.src = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js';
+document.body.appendChild(s);
+</script>
+
+<script>
+// tally box container adjustments
+document.querySelector('.tally-boxes').parentElement.style['boxShadow']='none';
+document.querySelector('.tally-boxes').parentElement.style['background']='transparent';
+document.querySelector('.tally-boxes').parentElement.style['padding']=0;
+
+// tally box set up
+function tallyType(tallyID) {
+document.querySelector('#' + tallyID + ' .tally-type').innerText = parent.DataSet_1103_Rows[13][1];
+}
+function tallyIcon(tallyID, type) {
+if (type === 'calendar') {document.querySelector('#' + tallyID + ' svg.tally-calendar').style['display'] = "inline-block"}
+if (type === 'phone') {document.querySelector('#' + tallyID + ' svg.tally-phone-calls').style['display'] = "inline-block"}
+}
+function tallyCount(tallyID) {
+document.querySelector('#' + tallyID + ' .tally-count').innerText = parent.DataSet_1103_Rows[13][3];
+}
+function tallyMovement(tallyID) {
+var data = parent.DataSet_1103_Rows;
+if (data[13][3] > data[12][3]) {
+document.querySelector('#' + tallyID + ' svg.tally-up').style['display'] = "inline-block";
+document.querySelector('#' + tallyID + ' .tally-main').style['background'] = "linear-gradient(90deg, #70B44E 0%, #89DB60 73.27%)";
+}
+if (data[13][3] < data[12][3]) {
+document.querySelector('#' + tallyID + ' svg.tally-down').style['display'] = "inline-block";
+document.querySelector('#' + tallyID + ' .tally-main').style['background'] = "linear-gradient(90deg, #D94F31 0%, #F07154 73.27%)";
+}
+if (data[13][3] === data[12][3]) {
+document.querySelector('#' + tallyID + ' svg.tally-minus').style['display'] = "inline-block";
+document.querySelector('#' + tallyID + ' .tally-main').style['background'] = "linear-gradient(90deg, #1D6BB0 0%, #4092D6 72.99%)";
+}
+}
+
+tallyType('tally-1103');
+tallyIcon('tally-1103', 'calendar');
+tallyCount('tally-1103');
+tallyMovement('tally-1103');
+
+
+// remove titles
+document.querySelectorAll('#remove-title').forEach(x=>{x.parentElement.querySelector('.section_title > br').remove(); });
+
+
+// ***************************
+// run after content is loaded
+// ***************************
+document.addEventListener('DOMContentLoaded', (e)=>{(()=>{
+document.querySelectorAll('[data-toggle=modal]').forEach((x)=>x.addEventListener('click', (e) => {addToMoreInfo(e);}));
+$('#moreInfoModal').on('shown.bs.modal', function () {
+  $('#moreInfoModal').trigger('focus');
+  
+});
+$('#moreInfoModal').on('hidden.bs.modal', function () {
+  $('#moreInfoModal .modal-body p').remove();
+  
+});
+function addToMoreInfo(e) {
+  var p = document.createElement('p');
+  var info = e.target.closest('[data-more-info]').dataset.moreInfo;
+  p.innerText = info;
+  document.querySelector('#moreInfoModal .modal-body').appendChild(p)
+}
+})();});
+</script>

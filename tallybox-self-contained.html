@@ -1,0 +1,355 @@
+<style type="text/css">
+  /* **** tally boxes **** */
+  button.tally-box {
+
+    text-align: left;
+    align-items: inherit;
+    border: none;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+    flex: 0 1 400px;
+    min-width: 280px;
+    border-radius: 8px;
+    color: #fff;
+    font-family: "Poppins";
+    margin: 10px auto;
+    padding: 0;
+    display: flex;
+    flex-flow: row;
+    overflow: hidden;
+  }
+  .tally-box:hover,
+  .tally-box:focus {
+    text-decoration: none;
+    color: #fff;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
+  }
+  .tally-box:active {
+    border: none;
+  }
+  .tally-main {
+    background: linear-gradient(90deg, #1d6bb0 0%, #4092d6 72.99%);
+    padding: 4px 14px;
+    flex: 1 0 80%;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-items: center;
+  }
+  [data-movement="up"].tally-main {
+    background: linear-gradient(90deg, #70b44e 0%, #89db60 73.27%);
+  }
+  [data-movement="down"].tally-main {
+    background: linear-gradient(90deg, #d94f31 0%, #f07154 73.27%);
+  }
+  .tally-type {
+    font-size: 1.4em;
+    line-height: 1.2em;
+    flex: 1 0 100%;
+  }
+  .tally-icon {
+    padding: 10px 0;
+    margin-right: auto;
+    flex: 0 1 50%;
+  }
+  .tally-count {
+    flex: 0 1 50%;
+    text-align: center;
+    font-size: 4em;
+    line-height: 1.1em;
+    font-weight: 700;
+  }
+  .tally-count:after {
+    line-height: 1em;
+    font-size: 0.2em;
+    font-weight: 100;
+    content: "recieved";
+    display: inline-block;
+    padding: 0 8px;
+  }
+  .tally-sub {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    min-height: 140px;
+    flex: 0 1 20%;
+  }
+  .tally-sub svg {
+    width: 100%;
+  }
+  .tally-movement {
+    display: none;
+    margin-bottom: auto;
+  }
+  .tally-movement svg {
+    max-height: 80px;
+    max-width: 50px;
+    padding-bottom: 10px;
+  }
+  .tally-info {
+    margin-top: auto;
+  }
+  svg.info-tip {
+    color: #777777;
+  }
+  .modal-backdrop {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  /* Base styles for the element that has a tooltip */
+  [data-tooltip],
+  .tooltip {
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* Base styles for the entire tooltip */
+  [data-tooltip]:before,
+  [data-tooltip]:after,
+  .tooltip:before,
+  .tooltip:after {
+    position: absolute;
+    visibility: hidden;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out,
+      -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out,
+      -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out,
+      transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    pointer-events: none;
+  }
+
+  /* Show the entire tooltip on hover and focus */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after,
+  [data-tooltip]:focus:before,
+  [data-tooltip]:focus:after,
+  .tooltip:hover:before,
+  .tooltip:hover:after,
+  .tooltip:focus:before,
+  .tooltip:focus:after {
+    visibility: visible;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+  }
+
+  /* Base styles for the tooltip's directional arrow */
+  .tooltip:before,
+  [data-tooltip]:before {
+    z-index: 1001;
+    border: 6px solid transparent;
+    background: transparent;
+    content: "";
+  }
+
+  /* Base styles for the tooltip's content area */
+  .tooltip:after,
+  [data-tooltip]:after {
+    z-index: 1000;
+    padding: 8px;
+    width: 160px;
+    background-color: #000;
+    background-color: hsla(0, 0%, 20%, 0.9);
+    color: #fff;
+    content: attr(data-tooltip);
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  /* tooltip orientation */
+
+  /* Top (default) */
+  [data-tooltip]:before,
+  [data-tooltip]:after,
+  .tooltip:before,
+  .tooltip:after,
+  .tooltip-top:before,
+  .tooltip-top:after {
+    bottom: 100%;
+    left: 50%;
+  }
+
+  [data-tooltip]:before,
+  .tooltip:before,
+  .tooltip-top:before {
+    margin-left: -6px;
+    margin-bottom: -12px;
+    border-top-color: #000;
+    border-top-color: hsla(0, 0%, 20%, 0.9);
+  }
+
+  /* Horizontally align top/bottom tooltips */
+  [data-tooltip]:after,
+  .tooltip:after,
+  .tooltip-top:after {
+    margin-left: -80px;
+  }
+
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after,
+  [data-tooltip]:focus:before,
+  [data-tooltip]:focus:after,
+  .tooltip:hover:before,
+  .tooltip:hover:after,
+  .tooltip:focus:before,
+  .tooltip:focus:after,
+  .tooltip-top:hover:before,
+  .tooltip-top:hover:after,
+  .tooltip-top:focus:before,
+  .tooltip-top:focus:after {
+    -webkit-transform: translateY(-12px);
+    -moz-transform: translateY(-12px);
+    transform: translateY(-12px);
+  }
+
+  /* Left */
+  .tooltip-left:before,
+  .tooltip-left:after {
+    right: 100%;
+    bottom: 50%;
+    left: auto;
+  }
+
+  .tooltip-left:before {
+    margin-left: 0;
+    margin-right: -12px;
+    margin-bottom: 0;
+    border-top-color: transparent;
+    border-left-color: #000;
+    border-left-color: hsla(0, 0%, 20%, 0.9);
+  }
+
+  .tooltip-left:hover:before,
+  .tooltip-left:hover:after,
+  .tooltip-left:focus:before,
+  .tooltip-left:focus:after {
+    -webkit-transform: translateX(-12px);
+    -moz-transform: translateX(-12px);
+    transform: translateX(-12px);
+  }
+
+  /* Bottom */
+  .tooltip-bottom:before,
+  .tooltip-bottom:after {
+    top: 100%;
+    bottom: auto;
+    left: 50%;
+  }
+
+  .tooltip-bottom:before {
+    margin-top: -12px;
+    margin-bottom: 0;
+    border-top-color: transparent;
+    border-bottom-color: #000;
+    border-bottom-color: hsla(0, 0%, 20%, 0.9);
+  }
+
+  .tooltip-bottom:hover:before,
+  .tooltip-bottom:hover:after,
+  .tooltip-bottom:focus:before,
+  .tooltip-bottom:focus:after {
+    -webkit-transform: translateY(12px);
+    -moz-transform: translateY(12px);
+    transform: translateY(12px);
+  }
+
+  /* Right */
+  .tooltip-right:before,
+  .tooltip-right:after {
+    bottom: 50%;
+    left: 100%;
+  }
+
+  .tooltip-right:before {
+    margin-bottom: 0;
+    margin-left: -12px;
+    border-top-color: transparent;
+    border-right-color: #000;
+    border-right-color: hsla(0, 0%, 20%, 0.9);
+  }
+
+  .tooltip-right:hover:before,
+  .tooltip-right:hover:after,
+  .tooltip-right:focus:before,
+  .tooltip-right:focus:after {
+    -webkit-transform: translateX(12px);
+    -moz-transform: translateX(12px);
+    transform: translateX(12px);
+  }
+
+  /* Move directional arrows down a bit for left/right tooltips */
+  .tooltip-left:before,
+  .tooltip-right:before {
+    top: 3px;
+  }
+
+  /* Vertically center tooltip content for left/right tooltips */
+  .tooltip-left:after,
+  .tooltip-right:after {
+    margin-left: 0;
+    margin-bottom: -16px;
+  }
+</style>
+<button id="tally-1" data-toggle="modal" data-target="#moreInfoModal" data-more-info class="tally-box"><div class="tally-main" data-movement> <div class="tally-type"></div> <div class="tally-icon">  </div> <div class="tally-count" ></div> </div> <div class="tally-sub"> <div class="tally-movement"> </div> <div class="tally-info tooltip-left" data-tooltip> <svg class="info-tip" width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg"> <g> <path id="info-tip-i" d="M8.69921 5.8589C8.69921 5.45609 8.83504 5.11886 9.1067 4.84719C9.37837 4.57553 9.71092 4.4397 10.1044 4.4397C10.4978 4.4397 10.8304 4.57553 11.102 4.84719C11.3737 5.11886 11.5095 5.45609 11.5095 5.8589C11.5095 6.25234 11.3737 6.58489 11.102 6.85655C10.8304 7.12822 10.4978 7.26405 10.1044 7.26405C9.71092 7.26405 9.37837 7.12822 9.1067 6.85655C8.83504 6.58489 8.69921 6.25234 8.69921 5.8589ZM11.3128 7.7418V15.5825H8.90998V7.7418H11.3128Z" fill="currentColor"></path> <path id="info-tip-Ellipse-1" d="M18.6787 10.423C18.6787 14.9694 14.8726 18.718 10.0989 18.718C5.32514 18.718 1.51909 14.9694 1.51909 10.423C1.51909 5.87651 5.32514 2.12797 10.0989 2.12797C14.8726 2.12797 18.6787 5.87651 18.6787 10.423Z" stroke="currentColor" stroke-width="2.52927"></path> </g> </svg> </div> </div></button>
+
+<div class="modal" id="moreInfoModal" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button> </div> <div class="modal-body"> </div> <div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div> </div> </div> </div>
+
+<script>
+  (()=>{
+    var bits = {}; 
+    bits.icon = `<svg id="radar-graph-icon" width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d="M90.5078 38.7793L51.8359 10.6543C51.3033 10.2641 50.6602 10.0537 50 10.0537C49.3397 10.0537 48.6967 10.2641 48.1641 10.6543L9.49218 38.7793C8.95814 39.1676 8.56084 39.715 8.35732 40.3431C8.1538 40.9713 8.15451 41.6477 8.35937 42.2754L23.1348 87.7832C23.3387 88.4101 23.7357 88.9564 24.2689 89.3441C24.8021 89.7317 25.4443 89.9408 26.1035 89.9414H73.9062C75.2637 89.9414 76.4551 89.0723 76.875 87.7832L91.6504 42.2754C92.0605 40.9863 91.6016 39.5801 90.5078 38.7793V38.7793ZM81.8945 40.7227L72.2754 43.8477L52.7441 29.7168V19.5215L81.8945 40.7227ZM45.5078 55.3906L36.8066 67.334L31.416 50.8105L45.5078 55.3906ZM34.1504 45.9375L47.2656 36.4551V50.2051L34.1504 45.9375ZM50 58.5156L59.1699 71.1035H40.8301L50 58.5156ZM52.7441 36.4551L65.8496 45.9375L52.7441 50.1953V36.4551V36.4551ZM54.4922 55.3906L68.584 50.8105L63.1934 67.334L54.4922 55.3906ZM47.2656 19.5215V29.7168L27.7246 43.8477L18.1055 40.7227L47.2656 19.5215V19.5215ZM16.5332 45.9766L24.9805 48.7207L32.832 72.7832L27.5781 80L16.5332 45.9766V45.9766ZM31.9434 83.3008L36.8555 76.5625H63.1543L68.0664 83.3008H31.9434ZM72.4219 80L67.168 72.7832L75.0195 48.7207L83.4668 45.9766L72.4219 80Z"></path> </svg>`;
+    bits.count = `4`;
+    bits.title = `Website Inquiry`;
+    bits.moreInfo = `Reports indicate we received ${bits.count} form submissions of the \"${bits.title}\" form originating from your site durning the last month.`;
+    bits.toolTip = `Total form submissions was ${bits.count}. click for more info.`;
+    bits.countSubText = `recieved`;
+    bits.movement = `up`; 
+    
+    document.querySelector('#tally-1').dataset.moreInfo = bits.moreInfo;
+    document.querySelector('#tally-1 .tally-icon').innerHTML = bits.icon;
+    document.querySelector('#tally-1 .tally-type').innerHTML = bits.title;
+    document.querySelector('#tally-1 .tally-count').innerHTML = bits.count;
+    document.querySelector('#tally-1 .tally-count').style.content = bits.countSubText;
+    document.querySelector('#tally-1 [data-movement]').dataset.movement = bits.movement;
+    document.querySelector('#tally-1 [data-tooltip]').dataset.tooltip = bits.toolTip;
+
+    // *****************************************
+    // run after content is loaded and only once
+    // *****************************************
+    document.addEventListener('DOMContentLoaded', (e) => {
+      (() => {
+        // add bootstrap js for modals
+        const s = document.createElement('script');
+        s.src = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js';
+        document.body.appendChild(s);
+
+        // tallyboxes listen for click and dynamically change the modal body content
+        document.querySelectorAll('[data-toggle=modal]').forEach((x) => x.addEventListener('click', (e) => { addToMoreInfo(e); }));
+
+        // trigger focus on modal shown for accessibility
+        $('#moreInfoModal').on('shown.bs.modal', function () {
+          $('#moreInfoModal').trigger('focus');
+        });
+
+        // remove the modal body content on hidden
+        $('#moreInfoModal').on('hidden.bs.modal', function () {
+          $('#moreInfoModal .modal-body p').remove();
+        });
+
+        // add tally box more info to modal body content
+        function addToMoreInfo(e) {
+          const p = document.createElement('p');
+          const info = e.target.closest('[data-more-info]').dataset.moreInfo;
+          p.innerText = info;
+          document.querySelector('#moreInfoModal .modal-body').appendChild(p)
+        }
+      })();
+    });
+  })();
+</script>

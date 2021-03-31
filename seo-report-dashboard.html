@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        - WEO Reports
+    </title>
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/Content/Site.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,700,700i|Oswald" rel="stylesheet">
+    <script type="text/javascript" src="/Scripts/WEO_lib.js"></script>
+    <script type="text/javascript" src="/Scripts/WEO_Dyn_Lib.js"></script>
+
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        font-family: "Poppins", Arial, Helvetica, sans-serif; 
+        font-size: 16px; 
+        font-weight: 300; 
+        color:#777777;
+        background: url(/images/BKG-seo-dashboard-2019.jpg) center center / cover no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    
+
+
+    /**********************  top  **********************/
+    #top {
+        padding:24px;
+        background-color:#1669b2; 
+        text-align:left; 
+        position:relative; 
+        position: sticky;
+        top:0; 
+        z-index:1030; 
+        right:0; 
+        left:0;
+    }
+    .navbar-brand {
+      height: auto;
+      padding:6px 0;
+      width: 200px;
+    }
+    .icon-bar {
+      background: #fff;
+    }
+    .report-list-section{
+      display: inline-block;
+      font-family: oswald;
+    }
+    .report-list-section > span {
+      color:white;
+      font-weight: bold;
+    }
+    #NavBar_DDL_ReportList{
+      background: #fff;
+      font-weight: bold;
+      padding:10px;
+    }
+    .btn-primary {
+      border-radius: 30px;
+      color:#1669B2;
+      background: #fff;
+    }
+    .btn-show-report {
+      font-weight: bold;
+      display: inline-block;
+    }
+    .nav>li>a {
+      color: #fff;
+      font-family: oswald;
+    }
+    .nav>li>a:active,.nav>li>a:hover,.nav>li>a:focus {
+      color: #777;
+    }
+    .nav>li>a.btn-logout {
+      padding: 6px 15px 6px 48px;
+      margin: 8px auto;
+      color: #777;
+    }
+    .btn-logout:before {
+      content: '';
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      top: 1px;
+      left: 12px;
+      background: url(/images/ICN-key-logout.png) center center / contain no-repeat;
+    }
+
+
+
+    /**********************  left  **********************/
+    #left {
+        width: 100%;
+        position: relative;
+        outline: 0px solid transparent;
+        background: rgba(255,255,255,.8);
+        color: #777777;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding-top: 20px;
+        padding-bottom: 40px;
+        text-align: center;
+        overflow: auto;
+    }
+
+
+    #andyAdmin {
+        background: url(./images/users/user-1516.jpg) center center / cover no-repeat;
+    }
+    .cuip {
+      display: block;
+      position: relative;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 6px solid #b2b4b4;
+      margin: 10px auto;
+    }
+    ul.left-nav-items {
+      list-style: none;
+      padding: 0px 0 0 60px;
+      margin: 0;
+      text-align: left;
+    }
+    .left-nav-items li {
+      padding: 10px 0;
+      position: relative;
+    }
+    .left-nav-items li:before{
+      content: '';
+      display: inline-block;
+      height: 27px;
+      width: 27px;
+      position: absolute;
+      top: 10px;
+      left: -30px;
+    }
+    #overview:before {
+      background: url(/images/ICN-graph-magnifying-glass.png) center center / contain no-repeat;
+    }
+    #analytics:before {
+      background: url(/images/ICN-graph-pie.png) center center / contain no-repeat;
+    }
+
+
+
+    /**********************  right  **********************/
+    #right {
+        width: auto;
+        height: auto;
+        outline: 0px solid transparent;
+        right: 0;
+        padding-top: 70px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.8);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 0px;
+      margin-bottom: 70px
+    }
+
+
+    @media (min-width: 499px) {
+      #left {
+        width: 200px;
+        position: fixed;
+        float: left;
+        top:99px;
+        bottom:0;
+      }
+      #right {
+        margin-left: 200px;
+        padding-top: 130px;
+      }
+      .navbar-brand {
+        width:250px
+      }
+    }
+
+
+    @media (min-width: 767px) and (max-width: 992px) {
+      .nav>li>a,.report-list-section {
+        font-size: 14px;
+      }
+      .navbar-brand {
+        width:180px;
+        padding-right: 20px;
+      }
+    }
+
+    @media (min-width: 991px) {
+      .navbar-brand {
+        padding-right: 60px;
+      }
+    }
+
+    </style>
+    <style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+        font-size: 11px;
+    }
+
+
+    </style>
+    <!-- Resources -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <!-- Chart code -->
+    <script>
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "light",
+        "dataProvider": [{
+            "month": "Oct 17",
+            "visitors": 194
+        }, {
+            "month": "Nov 17",
+            "visitors": 165
+        }, {
+            "month": "Dec 17",
+            "visitors": 151
+        }, {
+            "month": "Jan 18",
+            "visitors": 227
+        }, {
+            "month": "Feb 18",
+            "visitors": 174
+        }, {
+            "month": "Mar 18",
+            "visitors": 207
+        }],
+        "valueAxes": [{
+            "gridColor": "#FFFFFF",
+            "gridAlpha": 0.2,
+            "dashLength": 0
+        }],
+        "gridAboveGraphs": true,
+        "startDuration": 1,
+        "graphs": [{
+            "balloonText": "[[category]]: <b>[[value]]</b>",
+            "fillAlphas": 0.8,
+            "lineAlpha": 0.2,
+            "type": "column",
+            "valueField": "visitors"
+        }],
+        "chartCursor": {
+            "categoryBalloonEnabled": false,
+            "cursorAlpha": 0,
+            "zoomable": false
+        },
+        "categoryField": "month",
+        "categoryAxis": {
+            "gridPosition": "start",
+            "gridAlpha": 0,
+            "tickPosition": "start",
+            "tickLength": 10
+        },
+        "export": {
+            "enabled": true
+        }
+
+    });
+    </script>
+</head>
+
+<body style="padding-bottom:0px;margin-bottom:0px;">
+    <form method="post" action="./Default" id="form1">
+        
+        
+        <nav id="top" style="">
+            
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"><img src="/images/WEO-Logo.png" class="img-responsive" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+              <!-- begin input items -->
+              <div class="report-list-section">
+                <span>Month:</span>
+                <select name="ctl00$NavBar$DDL_ReportList" id="NavBar_DDL_ReportList">
+                    <option value="7583">August 2018</option>
+                    <option value="7306">July 2018</option>
+                    <option value="7157">June 2018</option>
+                    <option value="6983">May 2018</option>
+                    <option value="6805">April 2018</option>
+                    <option value="6625">March 2018</option>
+                    <option value="6450">February 2018</option>
+                    <option value="6271">January 2018</option>
+                    <option value="6107">December 2017</option>
+                    <option value="5926">November 2017</option>
+                    <option value="5752">October 2017</option>
+                    <option value="5601">September 2017</option>
+                    <option value="5442">August 2017</option>
+                    <option value="5280">July 2017</option>
+                    <option value="5130">June 2017</option>
+                    <option value="4950">May 2017</option>
+                    <option value="4781">April 2017</option>
+                    <option value="4614">March 2017</option>
+                    <option value="4294">February 2017</option>
+                    <option value="4163">January 2017</option>
+                    <option value="4114">December 2016</option>
+                    <option value="3963">November 2016</option>
+                    <option value="3653">October 2016</option>
+                    <option value="3652">September 2016</option>
+                    <option value="3358">August 2016</option>
+                    <option value="3196">July 2016</option>
+                    <option value="3082">June 2016</option>
+                    <option value="3031">May 2016</option>
+                    <option value="2844">April 2016</option>
+                    <option value="2781">March 2016</option>
+                    <option value="1681">June 2015</option>
+                    <option value="1524">May 2015</option>
+                    <option value="1472">April 2015</option>
+                    <option value="1263">March 2015</option>
+                    <option value="1273">February 2015</option>
+                </select>&nbsp;&nbsp;
+                <input class="btn btn-primary btn-show-report" type="submit" name="ctl00$NavBar$ctl00" value="Show Report" />
+              </div>
+
+              <!-- begin nav links -->
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Lorem</a></li>
+                <li><a href="#">Ipsum</a></li>
+                <li><a href="#">Lorem</a></li>
+                <li><a href="#">Ipsum</a></li>
+                <li><a href="#" class="btn btn-primary btn-sm btn-logout">Log Out</a></li>
+              </ul>
+            </div>
+        </nav>
+        <div style="position:relative; width:100%; height:auto;">
+            <div id="left">
+                <div id="LeftNav" style="">
+                  <div class="cuip" id="andyAdmin"></div>
+                  <p>
+                    <b>Andy Gooch</b><br>
+                    SEO Manager
+                  </p>
+                  <hr>
+                  <ul class="left-nav-items">
+                    <li id="overview"><a href="#">Overview</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li id="analytics"><a href="#">Analytics</a></li>
+                    <li><a href="#">SEO</a></li>
+                    <li><a href="#">PPC</a></li>
+                    <li><a href="#">Reviews</a></li>
+                    <li><a href="#">Social Media</a></li>
+                    <li><a href="#">Billing</a></li>
+                    <li><a href="#">Support</a></li>
+                  </ul>
+                </div>
+            </div>
+            <div id="right">
+                <div class="container-fluid">
+                  
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- four column area -->
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body"> 
+
+                          <!-- replace this content  -->
+                          This is one of four columns<br>This is one of four columns<br>This is one of four columns<br>This is one of four columns<br> 
+                          <!-- end replacable content  -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- two column area -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>This is one of two columns<br>
+                          <!-- end replacable content -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- one column area -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel">
+                        <div class="panel-body">
+
+                          <!-- replace this content -->
+                          This is the one column<br>This is the one column<br>This is the one column<br>This is the one column<br>
+                          <!-- end replaceable content -->
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- jquery is needed for bootstrap javscript plugins to run -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
